@@ -3,8 +3,13 @@ import os.path
 import shutil
 import time,datetime
 import string
-import sys
-from imp import reload
+import chardet
+
+SourceDeviceName = "TPA"
+TargetDeviceName = "TNA"
+SrcFile = "E:\git-svn\chn-std-166\TPA"	
+DesFile = "E:\MyPythonScripts\Test"		
+
 def copyFiles(sourceDir,  targetDir): 
     if sourceDir.find(".git") > 0: 
         return 
@@ -15,13 +20,12 @@ def copyFiles(sourceDir,  targetDir):
             if not os.path.exists(targetDir):  
                 os.makedirs(targetDir)  
             if not os.path.exists(targetFile) or(os.path.exists(targetFile) and (os.path.getsize(targetFile) != os.path.getsize(sourceFile))):
-                content = open(sourceFile, "rb").read().decode('utf-8')
-                open(targetFile, "wb").write(content.replace("TPA","TNA")) 
+                if  ".h" in sourceFile or ".cpp" in sourceFile or ".pro" in sourceFile or ".ui" in sourceFile :
+                    open(targetFile,"w").write(open(sourceFile, "r").read().replace(SourceDeviceName,TargetDeviceName)) 
+                else:
+                    open(targetFile,"wb").write(open(sourceFile, "rb").read())
         if os.path.isdir(sourceFile): 
             First_Directory = False 
-            copyFiles(sourceFile, targetFile)
-imp.reload(sys) 
-sys.setdefaultencoding('utf8') 			
-SrcFile = "E:\git-svn\chn-std-166\TPA"	
-DesFile = "E:\MyPythonScripts\Test"		 
+            copyFiles(sourceFile, targetFile)		
+
 copyFiles(SrcFile,DesFile)
