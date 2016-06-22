@@ -15,7 +15,7 @@ def getImg(html):
     x = 0
     for imgurl in imglist:
         print(imgurl)
-        urllib.request.urlretrieve(imgurl,'E:\MyPythonScripts\Icons'+str(PageNumber)+'%s.png' % x)
+        urllib.request.urlretrieve(imgurl,'E:\MyPythonScripts\Icons\\'+str(PageNumber)+'%s.png' % x)
         x+=1
 for i in range(20):
 	html = getHtml("http://findicons.com/search/home/"+str(i))
