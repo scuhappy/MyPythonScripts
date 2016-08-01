@@ -20,7 +20,7 @@ def copyFiles(sourceDir,  targetDir):
             if not os.path.exists(targetDir):  
                 os.makedirs(targetDir)  
             if not os.path.exists(targetFile) or(os.path.exists(targetFile) and (os.path.getsize(targetFile) != os.path.getsize(sourceFile))):
-                if  ".h" in sourceFile or ".cpp" in sourceFile or ".pro" in sourceFile or ".ui" in sourceFile :
+                if  ".h" in sourceFile or ".cpp" in sourceFile or ".pro" in sourceFile or ".ui" in sourceFile or ".vcproj" in sourceFile:
                     open(targetFile,"w").write(open(sourceFile, "r").read().replace(SourceDeviceName,TargetDeviceName)) 
                 else:
                     open(targetFile,"wb").write(open(sourceFile, "rb").read())

@@ -1,5 +1,6 @@
 import shutil
 
+print("Begin to copy...")
 # copy include files
 IncludeSrcPath = "E:\git-svn\chn-std-166\APT_COMMAND_LIB\src\\"
 IncludeDesPath = "E:/Qt/5.2.1_vs2010_opengl/5.2.1/msvc2010_opengl/include/APT_CMD_Library\\"
@@ -23,5 +24,6 @@ BinDesPath = 'E:/Qt/5.2.1_vs2010_opengl/5.2.1/msvc2010_opengl/bin\\'
 shutil.copy(BinSrcPath+'APT_CMD.dll',BinDesPath+'APT_CMD.dll');
 shutil.copy(BinSrcPath+'APT_CMDd.dll',BinDesPath+'APT_CMDd.dll');
 
+print("Copy succeed!")
 
 
