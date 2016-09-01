@@ -5,24 +5,31 @@ import time,datetime
 import string
 import chardet
 
-SourceDeviceName = "TPA"
-TargetDeviceName = "TNA"
-SrcFile = "E:\git-svn\chn-std-166\TPA"	
-DesFile = "E:\MyPythonScripts\Test"		
-
+SourceDeviceName = "TNA"
+TargetDeviceName = "TLS001"
+SrcFile = "E:\git-svn\chn-std-166\TNA\Thorlabs.WPF.TNA"	
+DesFile = "E:\MyPythonScripts\Thorlabs.WPF.TLS001"		
+filetypes = [".h",".cpp",".pro",".ui",".vcproj",".cs",".sln"]
 def copyFiles(sourceDir,  targetDir): 
     if sourceDir.find(".git") > 0: 
         return 
     for file in os.listdir(sourceDir): 
         sourceFile = os.path.join(sourceDir,  file) 
-        targetFile = os.path.join(targetDir,  file.replace("TPA","TNA")) 
+        targetFile = os.path.join(targetDir,  file.replace(SourceDeviceName,TargetDeviceName)) 
         if os.path.isfile(sourceFile): 
             if not os.path.exists(targetDir):  
                 os.makedirs(targetDir)  
             if not os.path.exists(targetFile) or(os.path.exists(targetFile) and (os.path.getsize(targetFile) != os.path.getsize(sourceFile))):
-                if  ".h" in sourceFile or ".cpp" in sourceFile or ".pro" in sourceFile or ".ui" in sourceFile or ".vcproj" in sourceFile:
-                    open(targetFile,"w").write(open(sourceFile, "r").read().replace(SourceDeviceName,TargetDeviceName)) 
-                else:
+                flag = 0
+                for type  in filetypes:
+                    if type in sourceFile:
+                        result = chardet.detect(open(sourceFile, "rb").readline())
+                        print("file name :"+sourceFile)
+                        print(result)
+                        data = open(sourceFile, "r",encoding=result["encoding"]).read().replace(SourceDeviceName,TargetDeviceName)
+                        open(targetFile,"w",encoding=result["encoding"]).write(data) 
+                        flag = 1
+                if 0 ==flag:
                     open(targetFile,"wb").write(open(sourceFile, "rb").read())
         if os.path.isdir(sourceFile): 
             First_Directory = False 
