@@ -6,9 +6,9 @@ import string
 import chardet
 
 SourceDeviceName = "TNA"
-TargetDeviceName = "TLS001"
+TargetDeviceName = "TDC001"
 SrcFile = "E:\git-svn\chn-std-166\TNA\Thorlabs.WPF.TNA"	
-DesFile = "E:\MyPythonScripts\Thorlabs.WPF.TLS001"		
+DesFile = "E:\MyPythonScripts\Thorlabs.WPF.TDC001"		
 filetypes = [".h",".cpp",".pro",".ui",".vcproj",".cs",".sln"]
 def copyFiles(sourceDir,  targetDir): 
     if sourceDir.find(".git") > 0: 
